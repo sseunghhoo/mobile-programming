@@ -1,54 +1,57 @@
-package com.example.votingsystem;
+package com.cookandroid10_2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ResultActivity extends AppCompatActivity {
-    private ImageView imageView;
-    private TextView titleTextView;
-
-    // 이미지 파일 ID 배열
     Integer imageFileId[] = {
-        R.drawable.pic1,
-        R.drawable.pic2,
-        R.drawable.pic3,
-        R.drawable.pic4,
-        R.drawable.pic5,
-        R.drawable.pic6,
-        R.drawable.pic7,
-        R.drawable.pic8,
-        R.drawable.pic9
+        R.drawable.pic1, R.drawable.pic2, R.drawable.pic3,
+        R.drawable.pic4, R.drawable.pic5, R.drawable.pic6,
+        R.drawable.pic7, R.drawable.pic8, R.drawable.pic9
     };
-
-    // 각 그림에 대한 투표 수
-    int[] votes = {5, 3, 2, 8, 6, 7, 4, 9, 10};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.result); // result.xml 레이아웃 파일
+        setContentView(R.layout.result);
 
-        imageView = findViewById(R.id.imageView);
-        titleTextView = findViewById(R.id.titleTextView);
+        ImageView resultImage = findViewById(R.id.result_image);
+        ListView voteList = findViewById(R.id.vote_list);
+        Button backButton = findViewById(R.id.back_button);
 
-        // 가장 높은 투표 수를 가진 그림 찾기
-        int maxVotesIndex = findMaxVotesIndex(votes);
+        // 예시: 첫 번째 이미지를 설정
+        resultImage.setImageResource(imageFileId[0]);
 
-        // 해당 그림과 제목 표시
-        imageView.setImageResource(imageFileId[maxVotesIndex]);
-        titleTextView.setText("가장 많은 투표를 받은 그림"); // 제목 수정 가능
-    }
+        // 리스트 데이터 설정
+        String[] voteItems = {
+            "독서하는 소녀",
+            "꽃장식 소녀",
+            "부해물 든 소녀",
+            "이젤에 놓은 베르양",
+            "참자는 소녀",
+            "테라스의 두 자매",
+            "피아노: 레슨",
+            "피아노 외의 소녀들",
+            "해변에서"
+        };
 
-    // 최대 투표 수를 가진 인덱스를 찾는 메서드
-    private int findMaxVotesIndex(int[] votes) {
-        int maxIndex = 0;
-        for (int i = 1; i < votes.length; i++) {
-            if (votes[i] > votes[maxIndex]) {
-                maxIndex = i;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, voteItems);
+        voteList.setAdapter(adapter);
+
+        // 돌아가기 버튼 클릭 시 이전 화면으로 이동
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // 현재 액티비티 종료
             }
-        }
-        return maxIndex;
+        });
     }
 }
+
