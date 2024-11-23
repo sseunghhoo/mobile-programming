@@ -21,7 +21,7 @@
         android:layout_below="@id/title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:src="@drawable/pic1" /> <!-- 여기에 첫 번째 이미지를 설정 -->
+        android:src="@drawable/pic1" /> <!-- 기본 이미지 설정 -->
 
     <ListView
         android:id="@+id/vote_list"
@@ -39,3 +39,4 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 </RelativeLayout>
+
